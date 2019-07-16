@@ -6,6 +6,7 @@ export class EnvironmentVariableConfigurationProvider implements IConfigurationP
   constructor(private options: IEnvironmentVariablesConfigurationOptions) {}
   load(): void {
     const envVariables = JSON.parse(JSON.stringify(process.env));
+    const config = {};
     Object.keys(envVariables)
       .filter(key => {
         if (this.options.prefix && key.indexOf(this.options.prefix) === 0) {
@@ -14,12 +15,13 @@ export class EnvironmentVariableConfigurationProvider implements IConfigurationP
         if (this.options.validNames.length === 0) {
           return true;
         }
+
         return this.options.validNames.indexOf(key) > -1;
       })
       .forEach(key => {
-        delete envVariables[key];
+        config[key] = envVariables[key];
       });
-    this.data = envVariables;
+    this.data = config;
   }
   getByKey(key: string): string | ConfigurationModel {
     if (!this.data) {

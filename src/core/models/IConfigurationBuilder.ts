@@ -1,7 +1,13 @@
 import { IConfigurationSource } from './IConfigurationSource';
 import { IConfigurationRoot } from './IConfigurationRoot';
 
+export interface SharedProperties {
+  [index: string]: string;
+}
+
 export interface IConfigurationBuilder {
-  add(source: IConfigurationSource): void;
+  sharedProperties: SharedProperties;
+  setRootPath(rootPath: string): IConfigurationBuilder;
+  add(source: IConfigurationSource): IConfigurationBuilder;
   build(): IConfigurationRoot;
 }

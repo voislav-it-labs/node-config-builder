@@ -1,7 +1,8 @@
 import { IEnvironmentVariablesConfigurationOptions } from './models/IEnvironmentVariablesConfigurationOptions';
-import { IConfigurationProvider } from '../core/models/IConfigurationProvider';
-import { ConfigurationModel } from '../core/models/ConfigurationModel';
-export class EnvironmentVariableConfigurationProvider implements IConfigurationProvider {
+import { IConfigurationProvider } from '@node-config-builder/core/models/IConfigurationProvider';
+import { ConfigurationModel } from '@node-config-builder/core/models/ConfigurationModel';
+export class EnvironmentVariableConfigurationProvider
+  implements IConfigurationProvider {
   data: ConfigurationModel;
   constructor(private options: IEnvironmentVariablesConfigurationOptions) {}
   load(): void {

@@ -1,6 +1,6 @@
 {
   "name": "@node-config-builder/core",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "public_api.js",
   "license": "MIT"
 }

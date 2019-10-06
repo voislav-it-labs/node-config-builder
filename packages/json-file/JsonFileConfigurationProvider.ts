@@ -1,5 +1,5 @@
-import { IConfigurationProvider } from '../core/models/IConfigurationProvider';
-import { ConfigurationModel } from '../core/models/ConfigurationModel';
+import { IConfigurationProvider } from '@node-config-builder/core/models/IConfigurationProvider';
+import { ConfigurationModel } from '@node-config-builder/core/models/ConfigurationModel';
 import * as path from 'path';
 import * as fs from 'fs';
 
@@ -43,7 +43,10 @@ export class JsonFileConfigurationProvider implements IConfigurationProvider {
       const content = buffer.toString();
       return JSON.parse(content);
     } catch (err) {
-      console.warn('Failed to load configuration from file: ', fileAbsolutePath);
+      console.warn(
+        'Failed to load configuration from file: ',
+        fileAbsolutePath
+      );
       return null;
     }
   }

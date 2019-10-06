@@ -1,20 +1,23 @@
-import { IConfigurationSource } from '../core/models/IConfigurationSource';
+import { IConfigurationSource } from '@node-config-builder/core/models/IConfigurationSource';
 import { IEnvironmentVariablesConfigurationOptions } from './models/IEnvironmentVariablesConfigurationOptions';
-import { IConfigurationBuilder } from '../core/models/IConfigurationBuilder';
-import { IConfigurationProvider } from '../core/models/IConfigurationProvider';
+import { IConfigurationBuilder } from '@node-config-builder/core/models/IConfigurationBuilder';
+import { IConfigurationProvider } from '@node-config-builder/core/models/IConfigurationProvider';
 import { EnvironmentVariableConfigurationProvider } from './EnvironmentVariableConfigurationProvider';
-export class EnvironmentVariableConfigurationSource implements IConfigurationSource {
+export class EnvironmentVariableConfigurationSource
+  implements IConfigurationSource {
   private options: IEnvironmentVariablesConfigurationOptions = {
     prefix: '',
     validNames: [],
-    transform: null,
+    transform: null
   };
   constructor() {}
   withPrefix(prefix: string): EnvironmentVariableConfigurationSource {
     this.options.prefix = prefix;
     return this;
   }
-  withValidNames(environmentVariableNames: string[]): EnvironmentVariableConfigurationSource {
+  withValidNames(
+    environmentVariableNames: string[]
+  ): EnvironmentVariableConfigurationSource {
     this.options.validNames = environmentVariableNames;
     return this;
   }

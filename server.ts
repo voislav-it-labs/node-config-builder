@@ -4,12 +4,18 @@ import { JsonFileConfigurationSource } from './packages/json-file/JsonFileConfig
 
 const c = new ConfigurationBuilder()
   .setRootPath(__dirname)
-  .add(new JsonFileConfigurationSource('tsconfig.json'))
+  .add(
+    new JsonFileConfigurationSource({
+      fileName: 'tsconfig.json',
+      rootPath: __dirname
+    })
+  )
   .add(
     new EnvironmentVariableConfigurationSource()
       .withPrefix('ALUMNI_')
       .withValidNames(['NODE_ENV', 'NODE_CONFIG_ENV'])
   );
 
-const root = c.build();
-console.log(root.configuration);
+c.build().then(root => {
+  console.log(root.configuration);
+});

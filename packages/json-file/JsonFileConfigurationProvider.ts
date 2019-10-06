@@ -2,22 +2,32 @@ import { IConfigurationProvider } from '@node-config-builder/core/models/IConfig
 import { ConfigurationModel } from '@node-config-builder/core/models/ConfigurationModel';
 import * as path from 'path';
 import * as fs from 'fs';
+import { JsonProviderOptions } from './models/json-provider-options';
 
 export class JsonFileConfigurationProvider implements IConfigurationProvider {
-  constructor(private rootPath: string, private fileName: string) {}
+  constructor(private options: JsonProviderOptions) {
+    this.options = {
+      optional: false,
+      ...options
+    };
+  }
 
   data: ConfigurationModel | null = null;
 
   load(): void {
-    if (path.isAbsolute(this.fileName)) {
-      this.data = this.loadJsonFile(this.fileName);
+    if (path.isAbsolute(this.options.fileName)) {
+      this.data = this.loadJsonFile(this.options.fileName);
       return;
     }
 
-    let filePath = path.join(this.rootPath, this.fileName);
+    let filePath = path.join(this.options.rootPath, this.options.fileName);
 
     if (!path.isAbsolute(filePath)) {
       filePath = path.join(__dirname, filePath);
+    }
+
+    if (!this.options.optional && !fs.existsSync(filePath)) {
+      throw new Error('File not found at path ' + filePath);
     }
 
     this.data = this.loadJsonFile(filePath);
@@ -29,13 +39,13 @@ export class JsonFileConfigurationProvider implements IConfigurationProvider {
 
   private loadJsonFile(fileAbsolutePath: string): ConfigurationModel | null {
     if (!fs.existsSync(fileAbsolutePath)) {
-      return null;
+      return {};
     }
 
     const stat = fs.statSync(fileAbsolutePath);
 
     if (!stat.isFile) {
-      return null;
+      return {};
     }
 
     try {
@@ -43,11 +53,11 @@ export class JsonFileConfigurationProvider implements IConfigurationProvider {
       const content = buffer.toString();
       return JSON.parse(content);
     } catch (err) {
-      console.warn(
+      console.error(
         'Failed to load configuration from file: ',
         fileAbsolutePath
       );
-      return null;
+      throw err;
     }
   }
 }

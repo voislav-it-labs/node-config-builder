@@ -1,9 +1,10 @@
-import {
-  IEnvironmentVariablesConfigurationOptions,
-  EnvironmentVariablesConfigurationTransformationSchema
-} from './models/IEnvironmentVariablesConfigurationOptions';
+import { IEnvironmentVariablesConfigurationOptions } from './models/IEnvironmentVariablesConfigurationOptions';
 import { IConfigurationProvider } from '@node-config-builder/core/models/IConfigurationProvider';
 import { ConfigurationModel } from '@node-config-builder/core/models/ConfigurationModel';
+import {
+  loadConfigByTransformation,
+  TransformationSchema
+} from '@node-config-builder/core/ConfigByTransformLoader';
 
 export class EnvironmentVariableConfigurationProvider
   implements IConfigurationProvider {
@@ -29,60 +30,29 @@ export class EnvironmentVariableConfigurationProvider
   }
 
   private loadByTransformation(
-    transform: EnvironmentVariablesConfigurationTransformationSchema
+    transform: TransformationSchema
   ): ConfigurationModel {
     const envVariables = process.env;
 
-    const setConfigByKey = (
-      config: any,
-      key: string,
-      envVariableKey: string
-    ) => {
-      return {
-        ...config,
-        [key]: envVariables[envVariableKey]
-      };
-    };
-
-    const setConfigByKeyByTransofrmation = (
-      config: any,
-      transform: EnvironmentVariablesConfigurationTransformationSchema
-    ) => {
-      if (!transform) {
-        return config;
-      }
-
-      Object.keys(transform).forEach(transformKeyName => {
-        const transformKeyValue = transform[transformKeyName];
-        if (typeof transformKeyValue === 'string') {
-          config = setConfigByKey(config, transformKeyName, transformKeyValue);
-        } else {
-          config[transformKeyName] = setConfigByKeyByTransofrmation(
-            {},
-            transformKeyValue
-          );
-        }
-      });
-
-      return config;
-    };
-
-    return setConfigByKeyByTransofrmation({}, transform);
+    return loadConfigByTransformation({
+      transform,
+      getValueByKey: key => envVariables[key]
+    });
   }
 
   private loadByPrefixAndNames(
     options: IEnvironmentVariablesConfigurationOptions
   ): ConfigurationModel {
     const envVariables = process.env;
-    const hasPrefix = this.options.prefix;
-    const hasValidNames = this.options.validNames.length > 0;
+    const hasPrefix = options.prefix;
+    const hasValidNames = options.validNames.length > 0;
 
     return Object.keys(envVariables)
       .filter(key => envVariables.hasOwnProperty(key))
       .filter(key => {
-        const prefixMatch = hasPrefix && key.indexOf(this.options.prefix) === 0;
+        const prefixMatch = hasPrefix && key.indexOf(options.prefix) === 0;
         const validNameMatch =
-          hasValidNames && this.options.validNames.indexOf(key) > -1;
+          hasValidNames && options.validNames.indexOf(key) > -1;
 
         if (hasPrefix && hasValidNames) {
           return prefixMatch && validNameMatch;

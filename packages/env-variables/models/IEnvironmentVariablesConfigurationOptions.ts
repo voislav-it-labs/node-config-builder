@@ -1,12 +1,7 @@
-type EnvironmentVariableName = string;
-export type EnvironmentVariablesConfigurationTransformationSchema = {
-  [key: string]:
-    | EnvironmentVariableName
-    | EnvironmentVariablesConfigurationTransformationSchema;
-};
+import { TransformationSchema } from '../../core/ConfigByTransformLoader';
 
 export interface IEnvironmentVariablesConfigurationOptions {
   prefix?: string;
   validNames?: string[];
-  transform?: EnvironmentVariablesConfigurationTransformationSchema;
+  transform?: TransformationSchema;
 }

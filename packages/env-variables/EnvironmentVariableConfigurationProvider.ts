@@ -12,31 +12,34 @@ export class EnvironmentVariableConfigurationProvider
 
   constructor(private options: IEnvironmentVariablesConfigurationOptions) {}
 
-  load(): void {
+  load(): Promise<void> {
     if (this.options.transform) {
-      this.data = this.loadByTransformation(this.options.transform);
-      return;
+      return this.loadByTransformation(this.options.transform).then(config => {
+        this.data = config;
+      });
     }
 
     this.data = this.loadByPrefixAndNames(this.options);
+
+    return Promise.resolve();
   }
 
-  getByKey(key: string): string | ConfigurationModel {
+  getByKey(key: string): Promise<string | ConfigurationModel> {
     if (!this.data) {
       return null;
     }
 
-    return this.data[key];
+    return Promise.resolve(this.data[key]);
   }
 
   private loadByTransformation(
     transform: TransformationSchema
-  ): ConfigurationModel {
+  ): Promise<ConfigurationModel> {
     const envVariables = process.env;
 
     return loadConfigByTransformation({
       transform,
-      getValueByKey: key => envVariables[key]
+      getValueByKey: key => Promise.resolve(envVariables[key])
     });
   }
 

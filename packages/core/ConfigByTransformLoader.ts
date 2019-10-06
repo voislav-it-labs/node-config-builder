@@ -2,7 +2,7 @@ import { ConfigurationModel } from './models/ConfigurationModel';
 
 export interface TransformationOptions {
   transform: TransformationSchema;
-  getValueByKey: (key: string) => string;
+  getValueByKey: (key: string) => Promise<string>;
 }
 
 export type TransformationSchema = {
@@ -11,12 +11,14 @@ export type TransformationSchema = {
 
 export function loadConfigByTransformation(
   options: TransformationOptions
-): ConfigurationModel {
+): Promise<ConfigurationModel> {
   const setConfigByKey = (config: any, key: string, envVariableKey: string) => {
-    return {
-      ...config,
-      [key]: options.getValueByKey(envVariableKey)
-    };
+    return options.getValueByKey(envVariableKey).then(value => {
+      return {
+        ...config,
+        [key]: value
+      };
+    });
   };
 
   const setConfigByKeyByTransofrmation = (
@@ -24,22 +26,31 @@ export function loadConfigByTransformation(
     transform: TransformationSchema
   ) => {
     if (!transform) {
-      return config;
+      return Promise.resolve(config);
     }
 
-    Object.keys(transform).forEach(transformKeyName => {
+    const promises = Object.keys(transform).map(transformKeyName => {
       const transformKeyValue = transform[transformKeyName];
       if (typeof transformKeyValue === 'string') {
-        config = setConfigByKey(config, transformKeyName, transformKeyValue);
+        return setConfigByKey(config, transformKeyName, transformKeyValue);
       } else {
-        config[transformKeyName] = setConfigByKeyByTransofrmation(
-          {},
-          transformKeyValue
+        return setConfigByKeyByTransofrmation({}, transformKeyValue).then(
+          value => {
+            config[transformKeyName] = value;
+            return config;
+          }
         );
       }
     });
 
-    return config;
+    return Promise.all(promises).then(results => {
+      return results.reduce((aggr, obj) => {
+        return {
+          ...aggr,
+          ...obj
+        };
+      }, {});
+    });
   };
 
   return setConfigByKeyByTransofrmation({}, options.transform);

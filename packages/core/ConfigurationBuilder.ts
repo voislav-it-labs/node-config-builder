@@ -6,7 +6,7 @@ import { RootPathKey } from './models/RootPathKey';
 
 export class ConfigurationBuilder implements IConfigurationBuilder {
   public sharedProperties = {
-    [RootPathKey]: __dirname,
+    [RootPathKey]: __dirname
   };
 
   private sources: IConfigurationSource[] = [];
@@ -21,8 +21,10 @@ export class ConfigurationBuilder implements IConfigurationBuilder {
     this.sources.push(source);
     return this;
   }
-  build(): IConfigurationRoot {
+
+  build(): Promise<IConfigurationRoot> {
     const providers = this.sources.map(source => source.build(this));
-    return new ConfigurationRoot(providers);
+    const root = new ConfigurationRoot(providers);
+    return root.reload().then(() => root);
   }
 }

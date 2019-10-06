@@ -14,7 +14,7 @@ export class JsonFileConfigurationProvider implements IConfigurationProvider {
 
   data: ConfigurationModel | null = null;
 
-  load(): void {
+  load(): Promise<void> {
     if (path.isAbsolute(this.options.fileName)) {
       this.data = this.loadJsonFile(this.options.fileName);
       return;
@@ -31,9 +31,11 @@ export class JsonFileConfigurationProvider implements IConfigurationProvider {
     }
 
     this.data = this.loadJsonFile(filePath);
+
+    return Promise.resolve();
   }
 
-  getByKey(key: string): string | ConfigurationModel {
+  getByKey(key: string): Promise<string | ConfigurationModel> {
     throw new Error('Method not implemented.');
   }
 

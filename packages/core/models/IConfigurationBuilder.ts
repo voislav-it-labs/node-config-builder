@@ -9,5 +9,5 @@ export interface IConfigurationBuilder {
   sharedProperties: SharedProperties;
   setRootPath(rootPath: string): IConfigurationBuilder;
   add(source: IConfigurationSource): IConfigurationBuilder;
-  build(): IConfigurationRoot;
+  build(): Promise<IConfigurationRoot>;
 }

@@ -4,7 +4,9 @@ import { JsonFileConfigurationSource } from './JsonFileConfigurationSource';
 import { IConfigurationRoot } from '@node-config-builder/core/models/IConfigurationRoot';
 
 describe('JsonFileConfigurationProvider', () => {
-  function getConfig(source: JsonFileConfigurationSource): IConfigurationRoot {
+  function getConfig(
+    source: JsonFileConfigurationSource
+  ): Promise<IConfigurationRoot> {
     return new ConfigurationBuilder()
       .setRootPath(__dirname)
       .add(source)
@@ -12,28 +14,31 @@ describe('JsonFileConfigurationProvider', () => {
   }
 
   it('should find relative file and generate its config', () => {
-    const config = getConfig(
+    return getConfig(
       new JsonFileConfigurationSource({
         fileName: './test-files/sample1.json'
       })
-    );
-
-    expect(config.configuration.one).toBe(1);
-    expect(config.configuration.two).toBe('two');
-    expect(config.configuration.complex).toEqual({
-      'complex-one': 'complex-1',
-      'complex-two': true
+    ).then(config => {
+      expect(config.configuration.one).toBe(1);
+      expect(config.configuration.two).toBe('two');
+      expect(config.configuration.complex).toEqual({
+        'complex-one': 'complex-1',
+        'complex-two': true
+      });
     });
   });
 
   it('should find file at absolute path', () => {
     const fileName = path.resolve(__dirname, './test-files/sample1.json');
-    const config = getConfig(new JsonFileConfigurationSource({ fileName }));
-    expect(config.configuration.one).toBe(1);
+    return getConfig(new JsonFileConfigurationSource({ fileName })).then(
+      config => {
+        expect(config.configuration.one).toBe(1);
+      }
+    );
   });
 
   it('should fail when file does not exist', () => {
-    expect(() =>
+    return expect(() =>
       getConfig(
         new JsonFileConfigurationSource({
           fileName: './file-does-not-exist-123.json'
@@ -43,7 +48,7 @@ describe('JsonFileConfigurationProvider', () => {
   });
 
   it('should not fail when optional and file does not exist', () => {
-    expect(() =>
+    return expect(() =>
       getConfig(
         new JsonFileConfigurationSource({
           fileName: './file-does-not-exist-123.json',

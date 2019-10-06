@@ -1,11 +1,17 @@
 {
-  "name": "ui-config",
+  "name": "node-config-builder",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "lerna": "lerna"
+  },
   "dependencies": {
     "@types/node": "^12.6.2",
     "deepmerge": "^4.0.0",
     "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "lerna": "^3.16.4"
   }
 }

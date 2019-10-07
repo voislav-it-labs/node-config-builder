@@ -5,7 +5,12 @@
   "license": "MIT",
   "scripts": {
     "lerna": "lerna",
-    "test": "jest"
+    "test": "jest",
+    "prebuild": "yarn clean",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "clean": "rimraf dist",
+    "tsc": "tsc"
   },
   "dependencies": {
     "@types/node": "^12.6.2",

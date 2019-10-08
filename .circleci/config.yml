@@ -1,14 +1,21 @@
 version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10.13.0
+
 jobs:
   test:
-    docker:
-      - image: circleci/node:10.13.0
+    <<: *defaults
     steps:
       - checkout
-      - run: npm test
+      - run: curl -o- -L https://yarnpkg.com/install.sh | bash
+      - run: yarn install
+      - run: yarn test
   build:
-    docker:
-      - image: circleci/node:10.13.0
+    <<: *defaults
     steps:
       - checkout
-      - run: npm run build
+      - run: curl -o- -L https://yarnpkg.com/install.sh | bash
+      - run: yarn run build

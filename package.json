@@ -13,6 +13,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
+    "@aws-sdk/client-ssm-node": "^0.1.0-preview.2",
     "@types/node": "^12.6.2",
     "deepmerge": "^4.0.0",
     "typescript": "^3.5.3"

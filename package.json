@@ -7,6 +7,7 @@
     "lerna": "lerna",
     "test": "jest",
     "prebuild": "yarn clean",
+    "postinstall": "lerna bootstrap",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "clean": "rimraf dist",

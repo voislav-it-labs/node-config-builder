@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Install packages
           command: yarn install --frozen-lockfile
-      -run:
+      - run:
           name: Bootstrap packages with lerna
           command: yarn lerna bootstrap
       - run:

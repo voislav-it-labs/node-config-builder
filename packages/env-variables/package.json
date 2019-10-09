@@ -1,9 +1,22 @@
 {
   "name": "@node-config-builder/env-variables",
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "dist/public_api",
+  "types": "dist/public_api",
+  "files": [
+    "dist"
+  ],
   "license": "MIT",
+  "scripts": {
+    "build": "yarn clean && yarn compile",
+    "clean": "rimraf dist && rimraf tsconfig.build.tsbuildinfo",
+    "compile": "tsc -b tsconfig.build.json"
+  },
   "dependencies": {
     "@node-config-builder/core": "^0.0.0"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.0",
+    "typescript": "^3.6.4"
   }
 }

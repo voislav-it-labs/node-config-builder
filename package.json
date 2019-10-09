@@ -15,14 +15,14 @@
   "dependencies": {
     "@aws-sdk/client-ssm-node": "^0.1.0-preview.2",
     "@types/node": "^12.6.2",
-    "deepmerge": "^4.0.0",
-    "typescript": "^3.5.3"
+    "deepmerge": "^4.0.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "jest": "^24.9.0",
     "lerna": "^3.16.4",
     "rimraf": "^3.0.0",
-    "ts-jest": "^24.1.0"
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
   }
 }

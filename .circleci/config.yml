@@ -41,12 +41,33 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run: yarn run build
+  
+  deploy:
+  <<: *defaults
+  steps:
+    - attach_workspace:
+      at: ~/repo
+    run: echo "Publishing repo"
 
 workflows:
   version: 2
-  test-build:
+  test-build-deploy:
     jobs:
-      - test
+      - test:
+        filters:
+            tags:
+              only: /^v.*/
       - build:
           requires:
             - test
+          filters:
+            tags:
+              only: /^v.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

@@ -1,4 +1,4 @@
-import { TransformationSchema } from '../../core/ConfigByTransformLoader';
+import { TransformationSchema } from '../../../core/src/ConfigByTransformLoader';
 
 export interface IEnvironmentVariablesConfigurationOptions {
   prefix?: string;

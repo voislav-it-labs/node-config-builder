@@ -1,9 +1,9 @@
-import { IConfigurationSource } from '@node-config-builder/core/models/IConfigurationSource';
+import { IConfigurationSource } from '@node-config-builder/core/src/models/IConfigurationSource';
 import { IEnvironmentVariablesConfigurationOptions } from './models/IEnvironmentVariablesConfigurationOptions';
-import { IConfigurationBuilder } from '@node-config-builder/core/models/IConfigurationBuilder';
-import { IConfigurationProvider } from '@node-config-builder/core/models/IConfigurationProvider';
+import { IConfigurationBuilder } from '@node-config-builder/core/src/models/IConfigurationBuilder';
+import { IConfigurationProvider } from '@node-config-builder/core/src/models/IConfigurationProvider';
 import { EnvironmentVariableConfigurationProvider } from './EnvironmentVariableConfigurationProvider';
-import { TransformationSchema } from '../core/ConfigByTransformLoader';
+import { TransformationSchema } from '../../core/src/ConfigByTransformLoader';
 
 export class EnvironmentVariableConfigurationSource
   implements IConfigurationSource {

@@ -63,5 +63,6 @@
       "@node-config-builder/core": ["packages/core"],
       "@node-config-builder/core/*": ["packages/core/*"]
     }
-  }
+  },
+  "exclude": ["dist", "node_modules"]
 }

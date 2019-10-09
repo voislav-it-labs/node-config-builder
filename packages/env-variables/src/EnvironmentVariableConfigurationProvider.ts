@@ -1,10 +1,10 @@
 import { IEnvironmentVariablesConfigurationOptions } from './models/IEnvironmentVariablesConfigurationOptions';
-import { IConfigurationProvider } from '@node-config-builder/core/models/IConfigurationProvider';
-import { ConfigurationModel } from '@node-config-builder/core/models/ConfigurationModel';
+import { IConfigurationProvider } from '@node-config-builder/core/src/models/IConfigurationProvider';
+import { ConfigurationModel } from '@node-config-builder/core/src/models/ConfigurationModel';
 import {
   loadConfigByTransformation,
   TransformationSchema
-} from '@node-config-builder/core/ConfigByTransformLoader';
+} from '@node-config-builder/core/src/ConfigByTransformLoader';
 
 export class EnvironmentVariableConfigurationProvider
   implements IConfigurationProvider {

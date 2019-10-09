@@ -1,6 +1,6 @@
-import { ConfigurationBuilder } from './packages/core/ConfigurationBuilder';
-import { EnvironmentVariableConfigurationSource } from './packages/env-variables/EnvironmentVariableConfigurationSource';
-import { JsonFileConfigurationSource } from './packages/json-file/JsonFileConfigurationSource';
+import { ConfigurationBuilder } from './packages/core/src/ConfigurationBuilder';
+import { EnvironmentVariableConfigurationSource } from './packages/env-variables/src/EnvironmentVariableConfigurationSource';
+import { JsonFileConfigurationSource } from './packages/json-file/src/JsonFileConfigurationSource';
 
 const c = new ConfigurationBuilder()
   .setRootPath(__dirname)

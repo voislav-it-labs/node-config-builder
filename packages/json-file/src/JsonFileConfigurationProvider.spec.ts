@@ -1,7 +1,7 @@
-import { ConfigurationBuilder } from '@node-config-builder/core/ConfigurationBuilder';
+import { ConfigurationBuilder } from '@node-config-builder/core/src/ConfigurationBuilder';
 import * as path from 'path';
 import { JsonFileConfigurationSource } from './JsonFileConfigurationSource';
-import { IConfigurationRoot } from '@node-config-builder/core/models/IConfigurationRoot';
+import { IConfigurationRoot } from '@node-config-builder/core/src/models/IConfigurationRoot';
 
 describe('JsonFileConfigurationProvider', () => {
   function getConfig(
@@ -16,7 +16,7 @@ describe('JsonFileConfigurationProvider', () => {
   it('should find relative file and generate its config', () => {
     return getConfig(
       new JsonFileConfigurationSource({
-        fileName: './test-files/sample1.json'
+        fileName: '../tests/json-files/sample1.json'
       })
     ).then(config => {
       expect(config.configuration.one).toBe(1);
@@ -29,7 +29,10 @@ describe('JsonFileConfigurationProvider', () => {
   });
 
   it('should find file at absolute path', () => {
-    const fileName = path.resolve(__dirname, './test-files/sample1.json');
+    const fileName = path.resolve(
+      __dirname,
+      '../tests/json-files/sample1.json'
+    );
     return getConfig(new JsonFileConfigurationSource({ fileName })).then(
       config => {
         expect(config.configuration.one).toBe(1);
@@ -62,7 +65,7 @@ describe('JsonFileConfigurationProvider', () => {
     expect(() =>
       getConfig(
         new JsonFileConfigurationSource({
-          fileName: './test-files/invalid-json-file.json'
+          fileName: '../tests/json-files/invalid-json-file.json'
         })
       )
     ).toThrow();

@@ -14,6 +14,10 @@ export function loadConfigByTransformation(
 ): Promise<ConfigurationModel> {
   const setConfigByKey = (config: any, key: string, envVariableKey: string) => {
     return options.getValueByKey(envVariableKey).then(value => {
+      if (typeof value !== 'number' && !value) {
+        return config;
+      }
+
       return {
         ...config,
         [key]: value

@@ -47,7 +47,9 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run: echo "Publishing repo"
+      - run:
+          name: Publish packages
+          command: npm run lerna publish from-package
 
 workflows:
   version: 2

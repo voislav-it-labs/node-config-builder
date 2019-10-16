@@ -10,7 +10,8 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "clean": "rimraf dist",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "version:patch": "lerna version patch"
   },
   "dependencies": {
     "@aws-sdk/client-ssm-node": "^0.1.0-preview.2",

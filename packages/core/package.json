@@ -1,6 +1,6 @@
 {
   "name": "@node-config-builder/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/public_api",
   "types": "dist/public_api",
   "files": [

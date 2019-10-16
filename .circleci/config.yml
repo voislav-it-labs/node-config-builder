@@ -49,7 +49,7 @@ jobs:
           at: ~/repo
       - run:
           name: Publish packages
-          command: npm run lerna publish from-package
+          command: npm run lerna publish from-package --yes
 
 workflows:
   version: 2

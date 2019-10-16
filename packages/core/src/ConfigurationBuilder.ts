@@ -5,6 +5,7 @@ import { ConfigurationRoot } from './ConfigurationRoot';
 import { RootPathKey } from './models/RootPathKey';
 
 export class ConfigurationBuilder implements IConfigurationBuilder {
+  // Deprecated
   public sharedProperties = {
     [RootPathKey]: __dirname
   };

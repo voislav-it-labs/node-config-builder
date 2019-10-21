@@ -1,6 +1,6 @@
 {
   "name": "@node-config-builder/json-file",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "dist/public_api",
   "types": "dist/public_api",
   "files": [
@@ -13,7 +13,7 @@
     "compile": "tsc -b tsconfig.build.json"
   },
   "dependencies": {
-    "@node-config-builder/core": "^0.0.5"
+    "@node-config-builder/core": "^0.0.6"
   },
   "devDependencies": {
     "rimraf": "^3.0.0",

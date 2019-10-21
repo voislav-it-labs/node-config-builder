@@ -6,7 +6,7 @@ defaults: &defaults
     - image: circleci/node:10.13.0
 
 jobs:
-  test:
+  build:
     <<: *defaults
     steps:
       - checkout
@@ -25,7 +25,7 @@ jobs:
           command: yarn lerna bootstrap
       - run:
           name: Run tests
-          command: yarn test
+          command: yarn lerna run build
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
@@ -35,12 +35,12 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths: .
-  build:
+  test:
     <<: *defaults
     steps:
       - attach_workspace:
           at: ~/repo
-      - run: yarn lerna run build
+      - run: yarn test
 
   deploy:
     <<: *defaults

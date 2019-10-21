@@ -1,6 +1,6 @@
 import { EnvironmentVariableConfigurationSource } from './EnvironmentVariableConfigurationSource';
-import { IConfigurationRoot } from '@node-config-builder/core/src/models/IConfigurationRoot';
-import { ConfigurationBuilder } from '@node-config-builder/core/src/ConfigurationBuilder';
+import { IConfigurationRoot } from '@node-config-builder/core';
+import { ConfigurationBuilder } from '@node-config-builder/core';
 
 describe('EnvironmentVariableConfigurationSource', () => {
   function getConfig(

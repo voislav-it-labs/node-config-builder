@@ -1,7 +1,7 @@
-import { TransformationSchema } from '@node-config-builder/core/src/ConfigByTransformLoader';
-import { IConfigurationProvider } from '@node-config-builder/core/src/models/IConfigurationProvider';
-import { ConfigurationModel } from '@node-config-builder/core/src/models/ConfigurationModel';
-import { loadConfigByTransformation } from '@node-config-builder/core/src/ConfigByTransformLoader';
+import { TransformationSchema } from '@node-config-builder/core';
+import { IConfigurationProvider } from '@node-config-builder/core';
+import { ConfigurationModel } from '@node-config-builder/core';
+import { loadConfigByTransformation } from '@node-config-builder/core';
 
 import { SSMClient } from '@aws-sdk/client-ssm-node/SSMClient';
 import { GetParameterCommand } from '@aws-sdk/client-ssm-node';

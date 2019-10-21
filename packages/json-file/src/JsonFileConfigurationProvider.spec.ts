@@ -1,7 +1,7 @@
-import { ConfigurationBuilder } from '@node-config-builder/core/src/ConfigurationBuilder';
+import { ConfigurationBuilder } from '@node-config-builder/core';
 import * as path from 'path';
 import { JsonFileConfigurationSource } from './JsonFileConfigurationSource';
-import { IConfigurationRoot } from '@node-config-builder/core/src/models/IConfigurationRoot';
+import { IConfigurationRoot } from '@node-config-builder/core';
 
 describe('JsonFileConfigurationProvider', () => {
   function getConfig(

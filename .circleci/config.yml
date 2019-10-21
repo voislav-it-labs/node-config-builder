@@ -40,7 +40,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run: yarn run build
+      - run: yarn lerna run build
 
   deploy:
     <<: *defaults
@@ -55,19 +55,19 @@ workflows:
   version: 2
   test-build-deploy:
     jobs:
-      - test:
+      - build:
           filters:
             tags:
               only: /^v.*/
-      - build:
+      - test:
           requires:
-            - test
+            - build
           filters:
             tags:
               only: /^v.*/
       - deploy:
           requires:
-            - build
+            - test
           filters:
             tags:
               only: /^v.*/

@@ -1,8 +1,8 @@
-import { IConfigurationSource } from '@node-config-builder/core/src/models/IConfigurationSource';
-import { IConfigurationBuilder } from '@node-config-builder/core/src/models/IConfigurationBuilder';
-import { IConfigurationProvider } from '@node-config-builder/core/src/models/IConfigurationProvider';
+import { IConfigurationSource } from '@node-config-builder/core';
+import { IConfigurationBuilder } from '@node-config-builder/core';
+import { IConfigurationProvider } from '@node-config-builder/core';
 import { JsonFileConfigurationProvider } from './JsonFileConfigurationProvider';
-import { RootPathKey } from '@node-config-builder/core/src/models/RootPathKey';
+import { RootPathKey } from '@node-config-builder/core';
 import { JsonProviderOptions } from './models/json-provider-options';
 
 export class JsonFileConfigurationSource implements IConfigurationSource {

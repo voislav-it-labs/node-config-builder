@@ -1,7 +1,7 @@
-import { IConfigurationSource } from '@node-config-builder/core/src/models/IConfigurationSource';
+import { IConfigurationSource } from '@node-config-builder/core';
 import { IEnvironmentVariablesConfigurationOptions } from './models/IEnvironmentVariablesConfigurationOptions';
-import { IConfigurationBuilder } from '@node-config-builder/core/src/models/IConfigurationBuilder';
-import { IConfigurationProvider } from '@node-config-builder/core/src/models/IConfigurationProvider';
+import { IConfigurationBuilder } from '@node-config-builder/core';
+import { IConfigurationProvider } from '@node-config-builder/core';
 import { EnvironmentVariableConfigurationProvider } from './EnvironmentVariableConfigurationProvider';
 import { TransformationSchema } from '../../core/src/ConfigByTransformLoader';
 

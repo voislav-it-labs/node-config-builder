@@ -1,5 +1,5 @@
-import { IConfigurationProvider } from '@node-config-builder/core/src/models/IConfigurationProvider';
-import { ConfigurationModel } from '@node-config-builder/core/src/models/ConfigurationModel';
+import { IConfigurationProvider } from '@node-config-builder/core';
+import { ConfigurationModel } from '@node-config-builder/core';
 import * as path from 'path';
 import * as fs from 'fs';
 import { JsonProviderOptions } from './models/json-provider-options';

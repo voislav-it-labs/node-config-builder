@@ -1,6 +1,6 @@
 {
   "name": "@node-config-builder/aws-parameter-store",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "dist/public_api",
   "types": "dist/public_api",
   "files": [
@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "@aws-sdk/client-ssm-node": "^0.1.0-preview.2",
-    "@node-config-builder/core": "^0.0.6"
+    "@node-config-builder/core": "^0.0.7"
   },
   "devDependencies": {
     "rimraf": "^3.0.0",

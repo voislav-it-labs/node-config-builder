@@ -61,7 +61,12 @@
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     "paths": {
       "@node-config-builder/core": ["packages/core"],
-      "@node-config-builder/core/*": ["packages/core/*"]
+      "@node-config-builder/core/*": ["packages/core/*"],
+      "@node-config-builder/env-variables": ["packages/env-variables"],
+      "@node-config-builder/json-file": ["packages/json-file"],
+      "@node-config-builder/aws-parameter-store": [
+        "packages/aws-parameter-store"
+      ]
     }
   },
   "exclude": ["dist", "node_modules"]
